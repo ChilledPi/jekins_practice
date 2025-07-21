@@ -38,6 +38,21 @@ public class Passenger {
         return flight;
     }
 
+    public void joinFlight(Flight flight) {
+        Flight previousFlight = this.flight;
+        if (previousFlight != null) {
+            if (!previousFlight.removePassenger(this)) {
+                throw new RuntimeException("승객을 삭제할 수 없습니다");
+            }
+        }
+        setFlight(flight);
+        if (flight != null) {
+            if (!flight.addPassenger(this)) {
+                throw new RuntimeException("승객을 추가할 수 없습니다");
+            }
+        }
+    }
+
     public void setFlight(Flight flight) {
         this.flight = flight;
     }

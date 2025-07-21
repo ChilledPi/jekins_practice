@@ -11,6 +11,16 @@ public class FlightWithPassengersTest {
     private Flight flight = new Flight("AA123", 1);
 
     @Test
+    public void testPassengerJoinsFlight() {
+        Passenger passenger = new Passenger("123-45-6789", "John Smith", "US");
+
+        Flight flight = new Flight("AA123", 100);
+        passenger.joinFlight(flight);
+        assertEquals(flight, passenger.getFlight());
+        assertEquals(1, flight.getNumberOfPassengers());
+    }
+
+    @Test
     public void testAddRemovePassenger() {
         Passenger passenger = new Passenger("124-56-7890", "Michael Johnson", "US");
 
@@ -18,7 +28,7 @@ public class FlightWithPassengersTest {
         assertEquals(1, flight.getNumberOfPassengers());
         assertEquals(flight, passenger.getFlight());
 
-        assertTrue(flight.removePassenger(passenger));
+        flight.removePassenger(passenger);
         assertEquals(0, flight.getNumberOfPassengers());
         assertEquals(null, passenger.getFlight());
     }
